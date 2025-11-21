@@ -172,7 +172,6 @@ export default function AdminPage() {
         </button>
       </div>
 
-      {/* Waiting Queue */}
       <div className="mt-12">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">
           Daftar Antrian Menunggu

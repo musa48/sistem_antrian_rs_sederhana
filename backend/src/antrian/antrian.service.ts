@@ -41,20 +41,34 @@ export class AntrianService {
   }
 
   async getDisplayAntrians() {
-    const current = await this.AntrianModel.findOne({
+    let current = await this.AntrianModel.findOne({
       where: { status: 'called' },
-      order: [['createdAt', 'ASC']]
+      order: [['createdAt', 'ASC']],
     });
 
-    const kiosk = await this.AntrianModel.findOne({
+    if (!current) {
+      current = await this.AntrianModel.findOne({
+        where: { status: 'waiting' },
+        order: [['createdAt', 'ASC']],
+      });
+    }
+
+    let kiosk = await this.AntrianModel.findOne({
       where: { status: 'waiting' },
       order: [['createdAt', 'DESC']],
     });
 
-    const waiting = await this.AntrianModel.findAll({
+    if (!kiosk) {
+      kiosk = await this.AntrianModel.findOne({
+        where: { status: 'called' },
+        order: [['createdAt', 'DESC']],
+      });
+    }
+
+    let waiting = await this.AntrianModel.findAll({
       where: {
         status: 'waiting',
-        ...(current && { createdAt: { [Op.gt]: current.createdAt } })
+        ...(current && { createdAt: { [Op.gt]: current.createdAt } }),
       },
       order: [['createdAt', 'ASC']],
       limit: 4,

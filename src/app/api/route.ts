@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// ⚠️ KOREKSI BASE_URL: Gunakan '/token' dan port NestJS yang benar
 const BASE_URL = "http://localhost:3010/antrian"; 
 
 export async function GET() {

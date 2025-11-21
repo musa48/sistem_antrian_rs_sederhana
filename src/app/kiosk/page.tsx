@@ -67,7 +67,6 @@ export default function KioskPage() {
                 const newToken = res.no_antrian;
                 setLastGenerated(newToken);
 
-                // Auto-hide after 5 seconds
                 setTimeout(() => {
                     setLastGenerated(null);
                 }, 6000);
